@@ -7,15 +7,15 @@ import {ApplicationFormComponent} from './components/application-form/applicatio
 import {RouterModule} from "@angular/router";
 
 @NgModule({
-  declarations: [
-  ],
-  imports: [
-    ApplicationFormComponent,
-    BrowserModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([]) // Ensure RouterModule is imported
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [],
+    imports: [
+        ApplicationFormComponent,
+        BrowserModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([])
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
