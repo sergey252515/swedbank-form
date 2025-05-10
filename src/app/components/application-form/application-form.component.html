@@ -1,0 +1,95 @@
+<!-- Intro Section -->
+<div class="form-container" *ngIf="currentStep === -1">
+    <div class="intro-section">
+        <h1>Welcome to Swedbank</h1>
+        <p>Please fill out this application form to apply for your chosen financial product. The process will take
+            approximately 5 minutes.</p>
+        <button class="swedbank-button primary" (click)="nextStep()">Start Application</button>
+    </div>
+</div>
+
+<!-- Questions Section -->
+<div class="form-container" *ngIf="currentStep >= 0 && currentStep < questions.length">
+    <div class="question-section" [formGroup]="applicationForm">
+        <div class="progress-bar">
+            <div class="progress" [style.width.%]="(currentStep / questions.length) * 100"></div>
+        </div>
+
+        <div class="question-container" *ngIf="getCurrentQuestion()">
+            <h2>{{ getCurrentQuestion().question }}
+                <span class="tooltip" *ngIf="getCurrentQuestion().tooltip">
+                <i class="info-icon">i</i>
+                <span class="tooltip-text">{{ getCurrentQuestion().tooltip }}</span>
+            </span>
+            </h2>
+
+            <!-- Radio Buttons -->
+            <app-radio-group [formGroup]="applicationForm"
+                             [options]="getCurrentQuestion().options"
+                             [controlName]="getCurrentQuestion().id"
+                             [tooltip]="getCurrentQuestion().tooltip"
+                             *ngIf="getCurrentQuestion().type === InputType.RADIO"></app-radio-group>
+            <app-select-group
+                    [formGroup]="applicationForm"
+                    [options]="getCurrentQuestion().options"
+                    [controlName]="getCurrentQuestion().id"
+                    *ngIf="getCurrentQuestion().type === InputType.SELECT"></app-select-group>
+            <app-number-input
+                    [formGroup]="applicationForm"
+                    [placeholder]="getCurrentQuestion().options"
+                    [controlName]="getCurrentQuestion().id"
+                    *ngIf="getCurrentQuestion().type === InputType.NUMBER"></app-number-input>
+            <app-checkbox-group
+                    [formGroup]="applicationForm"
+                    [options]="getCurrentQuestion().options"
+                    [controlName]="getCurrentQuestion().id"
+                    *ngIf="getCurrentQuestion().type === InputType.CHECKBOX"></app-checkbox-group>
+            <app-textarea-group
+                    [formGroup]="applicationForm"
+                    [placeholder]="getCurrentQuestion().options"
+                    [controlName]="getCurrentQuestion().id"
+                    *ngIf="getCurrentQuestion().type === InputType.TEXTAREA"></app-textarea-group>
+
+            <!-- Error Messages -->
+            <div class="error-message" *ngIf="applicationForm.get(getCurrentQuestion().id)?.errors?.['required'] &&
+                                      applicationForm.get(getCurrentQuestion().id)?.touched">
+                This field is required
+            </div>
+        </div>
+
+        <div class="navigation-buttons">
+            <button class="swedbank-button secondary"
+                    *ngIf="currentStep > 0"
+                    (click)="previousStep()">Back
+            </button>
+            <button class="swedbank-button primary"
+                    [disabled]="!isStepValid()"
+                    (click)="isLastStep() ? onSubmit() : nextStep()">
+                {{ isLastStep() ? 'Submit' : 'Next' }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Section -->
+<div class="form-container" *ngIf="isSummaryStep()">
+    <div class="summary-section">
+        <h2>Application Summary</h2>
+        <div class="summary-content">
+            <div class="summary-item" *ngFor="let question of questions">
+                <h3>{{ question.question }}</h3>
+                <p *ngIf="question.type === inputType.CHECKBOX">
+          <span *ngFor="let option of question.options">
+            {{ option.label }}: {{ formData.terms[option.value] ? 'Yes' : 'No' }}<br>
+          </span>
+                </p>
+                <p *ngIf="question.type !== inputType.CHECKBOX">
+                    {{ formData[question.id] }}
+                </p>
+            </div>
+        </div>
+        <div class="summary-actions">
+            <button class="swedbank-button secondary" (click)="currentStep = questions.length - 1">Edit</button>
+        </div>
+    </div>
+</div>

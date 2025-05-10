@@ -1,0 +1,277 @@
+$swedbank-yellow: #FFB81C;
+$swedbank-blue: #0058A3;
+$swedbank-dark-blue: #003B5C;
+$swedbank-gray: #F5F5F5;
+$swedbank-text: #333333;
+$swedbank-error: #D32F2F;
+
+.form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Intro Section
+.intro-section {
+  text-align: center;
+  padding: 2rem;
+
+  h1 {
+    color: $swedbank-blue;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $swedbank-text;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}
+
+// Progress Bar
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: $swedbank-gray;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+
+  .progress {
+    height: 100%;
+    background: $swedbank-yellow;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+}
+
+// Question Container
+.question-container {
+  margin-bottom: 2rem;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+// Form Elements
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.radio-option,
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: $swedbank-blue;
+  }
+
+  label {
+    color: $swedbank-text;
+    font-size: 1rem;
+  }
+}
+
+.select-group {
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: $swedbank-text;
+    background-color: white;
+
+    &:focus {
+      outline: none;
+      border-color: $swedbank-blue;
+    }
+  }
+}
+
+.input-group {
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: $swedbank-blue;
+    }
+  }
+}
+
+.textarea-group {
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+
+    &:focus {
+      outline: none;
+      border-color: $swedbank-blue;
+    }
+  }
+}
+
+// Tooltip
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: $swedbank-blue;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-style: normal;
+    cursor: help;
+  }
+
+  .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem;
+    background: $swedbank-dark-blue;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.5rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: $swedbank-dark-blue transparent transparent transparent;
+    }
+  }
+
+  &:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+// Error Messages
+.error-message {
+  color: $swedbank-error;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+// Navigation Buttons
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+// Swedbank Buttons
+.swedbank-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &.primary {
+    background-color: $swedbank-yellow;
+    color: $swedbank-dark-blue;
+
+    &:hover {
+      background-color: darken($swedbank-yellow, 5%);
+    }
+
+    &:disabled {
+      background-color: lighten($swedbank-yellow, 20%);
+      cursor: not-allowed;
+    }
+  }
+
+  &.secondary {
+    background-color: white;
+    color: $swedbank-blue;
+    border: 1px solid $swedbank-blue;
+
+    &:hover {
+      background-color: $swedbank-gray;
+    }
+  }
+}
+
+// Summary Section
+.summary-section {
+  h2 {
+    color: $swedbank-dark-blue;
+    margin-bottom: 2rem;
+  }
+
+  .summary-content {
+    .summary-item {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid $swedbank-gray;
+
+      h3 {
+        color: $swedbank-blue;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      p {
+        color: $swedbank-text;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  .summary-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+} 
